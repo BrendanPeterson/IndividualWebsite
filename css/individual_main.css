@@ -92,7 +92,6 @@ img.slide{
 	position: static;
 	overflow: hidden;
 	margin-top: 36%;
-	padding-bottom: 6%;
 }
 
 .content section {
@@ -178,6 +177,9 @@ img.slide{
 	margin-bottom: 10px;
 }
 
+.content {
+	padding-bottom: 6%;
+}
 .footer{
 	overflow: hidden;
 	position: fixed;
