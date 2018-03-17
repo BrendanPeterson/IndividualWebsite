@@ -2,6 +2,16 @@
 /* Credit: http://www.templatemo.com */
 
 var menuDisabled = false;
+var acc = document.getElementsByClassName("accordion");
+var i;
+
+jQuery(document).ready(function(){
+	jQuery('.skillbar').each(function(){
+		jQuery(this).find('.skillbar-bar').animate({
+			width:jQuery(this).attr('data-percent')
+		}, 6000);
+	});
+});
 
 jQuery(function($) {
     
@@ -32,13 +42,13 @@ jQuery(function($) {
 	$("#menu-list a, #responsive a").on('click',function(e){
             
 			
-			if(this.className == "external") {
+			if(this.className === "external") {
                 return;
             }
 			
 			e.preventDefault();
 
-            if (menuDisabled == false) // check the menu has disabled?
+            if (menuDisabled === false) // check the menu has disabled?
             {
                 menuDisabled = true; // disable to menu
                 
@@ -65,9 +75,17 @@ jQuery(function($) {
                     $(name+"-text").animate({left:'0px'},400,function(){
                         $(this).addClass("active");
                         
-                        google.maps.event.trigger(map, 'resize'); // resize map
-                        $.backstretch("resize"); // resize the background image
-                        
+                        menuDisabled = false; // enable the menu
+                    });
+                });
+				
+				 $("section.active").animate({right:$("section.active").outerWidth()}, 400,function(){
+                    $(this).removeClass("active");
+                    $(this).hide();
+                    $(name+"-secondSection").show();
+                    $(name+"-secondSection").animate({left:'0px'},400,function(){
+                        $(this).addClass("active");
+                       
                         menuDisabled = false; // enable the menu
                     });
                 });
@@ -97,4 +115,24 @@ function loadGoogleMap(){
     script.src = 'https://maps.googleapis.com/maps/api/js?v=3.exp&sensor=false&' +
         'callback=initialize';
     document.body.appendChild(script);
+}
+
+$('.flip').hover(function(){
+        $(this).find('.card').toggleClass('flipped');
+
+    });
+
+for (i = 0; i< acc.length; i++){
+	acc[i].addEventListener("click", function(){
+		/* toggle between adding and removing active class, to highlight the button that controls the panel */
+		this.classList.toggle("active");
+		
+		/* toggle between hiding and showing the active panel*/
+		var panel = this.nextElementSibling;
+		if(panel.style.maxHeight){
+			panel.style.maxHeight = null;
+		}else{
+			panel.style.maxHeight = panel.scrollHeight + "px";
+		}
+	});
 }
